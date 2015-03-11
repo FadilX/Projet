@@ -26,7 +26,7 @@ public class Attaque {
     public void clash(Population Population){
         System.err.println("TOUOOOOOOOO, TOUTUOUTOUTOUTROUROUROU (corne de guerre :/");
         System.out.println("En avant!! SUs à l'ennemi!");
-        if(Population.getWarrior()<=5){
+        if(Population.getWarrior()<=20){
             System.err.println("Vous avez perdu la guerre");
         }
         else{

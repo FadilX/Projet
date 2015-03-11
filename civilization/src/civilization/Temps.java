@@ -2,9 +2,10 @@ package civilization;
 
 public class Temps {
 
-
+	static int seconde = -5;
 	public static void temps() {
 		int t = 0;
+		
 		// Notre timer, on l'utilisera pour l'enchainement des vagues
 		// les thread permettent d'executer plusieurs fonctions en même temps
 		new Thread()
@@ -16,10 +17,13 @@ public class Temps {
 
 			public void run() {
 
-				while (t == 0) {
+				while (t == 0) {seconde=seconde+5;
+					
 
 					try {
 						Thread.sleep(5000);
+						
+					
 					} catch (InterruptedException e) {
 						System.out.println("erreur");
 					}
@@ -27,6 +31,7 @@ public class Temps {
 						s=s+5;
 					} else {
 						s = 0;
+						
 						if (m < 59) {
 
 							m++;
@@ -43,9 +48,9 @@ public class Temps {
 
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		temps();
 
 	}
-
+*/
 }

@@ -130,7 +130,7 @@ public void kill(Population p, int a){
 						System.out.println("erreur");
 					}
 
-					System.out.println("villageois :" + p.villageois);
+					System.out.println("villageois non actif :" + p.villageois);
 					System.out.println(" guerrier :" + p.soldat);
 					//System.out.println("scientifique:" + p.scientist);
 					//System.out.println(" marchand:" + p.merchant);

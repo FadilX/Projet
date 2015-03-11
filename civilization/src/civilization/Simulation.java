@@ -31,7 +31,7 @@ public class Simulation {
 		Attaque attaque = new Attaque();
 		Batiment b = new Batiment();
 		Population p = new Population();
-		Plateau m=new Plateau();
+		Plateau m = new Plateau();
 		Ressources r = new Ressources();
 		Scanner sc = new Scanner(System.in);
 		Bonus us = new Bonus();
@@ -41,156 +41,154 @@ public class Simulation {
 		Maison maison = new Maison();
 		Scierie scierie = new Scierie();
 		Carriere carriere = new Carriere();
-		Forum forum=new Forum();
+		Forum forum = new Forum();
+		Temps temp=new Temps();
 		int d = 1;
 		int e = 1;
 		String a;
+		String com;
 
 		p.population(p);
 		// m.structure("T",4,3);
 		// m.structure("/",3,1);
 		// m.structure("n",2,1);
-		Temps.temps();
+		temp.temps();
 		Ressources.incRessource(us);
 		forum.build(m);
-		
-		while (d == 1) {
-			System.err.println("Bienvenue, tapez 1 pour construire, 0 sinon");
-			d = sc.nextInt();
-			if (d == 1) {
-				System.err
-						.println("Tapez le nom du batiment que vous voulez construire (ferme, scierie, mine, carrière, maison, caserne)");
-				Scanner s = new Scanner(System.in);
-				a = s.nextLine();
+		System.err.println("Bienvenue, vous êtes le leader que nous attendions");
+		while(temp.seconde<180) {
+			System.err.println("Que voulez vous faire?"
+					+ " Tapez construire pour.. construire, vcreer pour creer des vilageois, gcreer pour creer des guerriers,"
+					+"affecter pour répartir vos villageois dans les différents batiments,"
+					+ "detruire pour détruire un batiment, attention! vous perdrez toutes les unitées qui s'y trouvent"
+					+ "vastalavista pour tuer des villageois"
+					+ "gastalavista pour tuer des guerriers"
+					+"sortir pour faire sortir vos villageois d'un batiment"
+					);
+			 com=sc.nextLine();
+			switch (com) {
+			case "construire":
+			
+				
+					System.err
+							.println("Tapez le nom du batiment que vous voulez construire (ferme, scierie, mine, carrière, maison, caserne)");
+					Scanner s = new Scanner(System.in);
+					a = s.nextLine();
 
-				switch (a) {
+					switch (a) {
 
-				case "caserne":
-					caserne.build(m);
-					break;
-				case "mine":
-					mine.build(m);
-					break;
-				case "ferme":
-					ferme.build(m);
-					break;
-				case "maison":
-					maison.build(m);
-					break;
-				case "scierie":
-					scierie.build(m);
-				case "carriere":
-					carriere.build(m);
-				default:
-					System.err.println("?");
-				}
-			} else {
-				System.err.println("Bien, au revoir");
-			}
-		}
-		/**
-		 * 
-		 * t'as une médaille si t'arrive à montrer pourquoi les bonus ne sont
-		 * pris en compte que aprés que tu sois sortis de la boucle de
-		 * l'affectation
-		 */
-		while (e == 1) {
-			System.err
-					.println("Voulez-vous affecter vos villageois à un batiment?");
-			e = sc.nextInt();
-
-			if (e == 1) {
-
-				p.entrer(m, p);
-
-			} else {
-				System.err.println("Bien, au revoir");
-				e = 0;
-			}
-
-		}
-
-		e = 1;
-		while (e == 1) {
-			System.err
-					.println("Voulez-vous faire sortir des unitées d'un batiment?");
-			e = sc.nextInt();
-
-			if (e == 1) {
-
-				p.sortir(m, p);
-
-			} else {
-				System.err.println("Bien, au revoir");
-				e = 0;
-			}
+					case "caserne":
+						caserne.build(m);
+						break;
+					case "mine":
+						mine.build(m);
+						break;
+					case "ferme":
+						ferme.build(m);
+						break;
+					case "maison":
+						maison.build(m);
+						break;
+					case "scierie":
+						scierie.build(m);
+					case "carriere":
+						carriere.build(m);
+					default:
+						System.err.println("?");
+					}
+				
+			break;
+			
+			
+			/**
+			 * 
+			 * t'as une médaille si t'arrive à montrer pourquoi les bonus ne
+			 * sont pris en compte que aprés que tu sois sortis de la boucle de
+			 * l'affectation
+			 */
+			case "affecter":
+			
+			p.entrer(m, p);
 			Bonus.cbonus(us, m, r, b, p);
-			Plateau.afficher(m);
-		}
-		
-		System.err
-				.println("Voulez-vous detruire un batiment ? (vous perdrez tous les villageois qu'il y a dedans)");
-		int n = sc.nextInt();
-		if (n == 1) {
-			System.err.println("Choisissez un batiment");
-			int x = sc.nextInt();
-			int y = sc.nextInt();
-			m.anhilate(m, x, y);
-		} else {
-			System.err.println("Bien, au revoir");
-		}
-		System.err.println("Voulez-vous créer des villageois?");
-		int k=sc.nextInt();
-		if(k==1){
-		System.err.println("Combien?");
-		int v=sc.nextInt();
-		forum.creevillageois( m,  maison,  p,  v);
-		}
-		else{System.err.println("Bien, au revoir");}
-		// il faudra bien sur avoir déjà construit une caserne... (un simple test if sur toutes les cases suffit)
-		System.err.println("Voulez vous créer des soldats?");
-		int q=sc.nextInt();
-		if(q==1){
-		System.err.println("Combien?");
-		int w=sc.nextInt();
-		caserne.creeguerrier( m,  maison,  p,  w);
-		}
-		else{System.err.println("Bien, au revoir");}
-		System.err.println("Voulez-vous tuer des unités ?");
-		int z=sc.nextInt();
-		if(z==1){
-			System.err.println("Combien?");
-			int h=sc.nextInt();
-			p.kill(p, h);
-		
-		}	
-		Bonus.cbonus(us, m, r, b, p);
-		Plateau.afficher(m);
-		attaque.go(p);
 
-	}
+				
+			break;
+
+			case "sortir":
+			
+					p.sortir(m, p);
+					Bonus.cbonus(us, m, r, b, p);
+					//Plateau.afficher(m);
+				
+				break;
+				
+			
+			case "detruire":
+			
+				System.err.println("Choisissez un batiment");
+				int x = sc.nextInt();
+				int y = sc.nextInt();
+				m.anhilate(m, x, y);
+			 
+			break;
+			case "vcreer": 
+			
+				System.err.println("Combien?");
+				int v = sc.nextInt();
+				forum.creevillageois(m, maison, p, v);
+			 
+			break;
+			// il faudra bien sur avoir déjà construit une caserne... (un simple
+			// test if sur toutes les cases suffit)
+			case "gcreer":
+				System.err.println("Combien?");
+				int w = sc.nextInt();
+				caserne.creeguerrier(m, maison, p, w);
+			break;
+			
+			case "vastalavista":
+			
+				System.err.println("Combien?");
+				int h = sc.nextInt();
+				p.kill(p, h);
+			break;
+			
+			default:
+				System.out.println("commande non reconnu");
+			}
+			
+			
+		}
+		attaque.go(p);}
+	
 }
-//  Done: vérifier si une case est libre avant de construire.
-//  Donefonction :qui permet de retirer des habitants d'un batiment
-// Done fonction  qui démolie un batiment (tu perds les unités qu'il y'a dedans, et tu // regagnes aucune ressource)
+
+// Done: vérifier si une case est libre avant de construire.
+// Donefonction :qui permet de retirer des habitants d'un batiment
+// Done fonction qui démolie un batiment (tu perds les unités qu'il y'a dedans,
+// et tu // regagnes aucune ressource)
 // Done fonction: suicide (pour tuer des unitées)
-//Done Classe HDV
-//Done:Les classes HDV et caserne produisent des unitées
-//Done: le nombre d'unité pouvant être produite est déterminé par le nombre de // maisons
-//Comment tuer une thread? car cbonus sous sa forme actuelle ne tient pas// compte des MAJ (destruction de batiment, changement du nombre d'unité)
-//http://openclassrooms.com/courses/bien-fermer-ses-threads-en-java http://stackoverflow.com/questions/671049/how-do-you-kill-a-thread-in-java
+// Done Classe HDV
+// Done:Les classes HDV et caserne produisent des unitées
+// Done: le nombre d'unité pouvant être produite est déterminé par le nombre de
+// // maisons
+// Comment tuer une thread? car cbonus sous sa forme actuelle ne tient pas//
+// compte des MAJ (destruction de batiment, changement du nombre d'unité)
+// http://openclassrooms.com/courses/bien-fermer-ses-threads-en-java
+// http://stackoverflow.com/questions/671049/how-do-you-kill-a-thread-in-java
 
-
-//A faire:
+// A faire:
 // Phase d'attaque... oulahlah va falloir établir des régles en gros t'as 2
 // choix tu te déffends ou tu payes
 
 // Passage à un nouvel age (améliorations globale)
-//Classes secondaires
-// Ressource secondaires (des classes qui dépenderont du nombre de guerriers scitifi...)
+// Classes secondaires
+// Ressource secondaires (des classes qui dépenderont du nombre de guerriers
+// scitifi...)
 // batiments secondaires
-//Les batiments possèdent des améliorations(en plus que les améliorations que procurera le passage à un nouvel age... (compliqué, pas nécessaire mais
-//stylé)
+// Les batiments possèdent des améliorations(en plus que les améliorations que
+// procurera le passage à un nouvel age... (compliqué, pas nécessaire mais
+// stylé)
 // Interface graphique
 // fun, cameo de personnages historiques, air spatiale=stage bonus, et enfin les
 // Cheats :').
