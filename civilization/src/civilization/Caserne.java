@@ -2,9 +2,9 @@ package civilization;
 
 import java.util.Scanner;
 
-public class Caserne extends Buildings {
+public class Caserne extends Batiment {
 	int coutGuerrier;
-	Buildings b = new Buildings();
+	Batiment b = new Batiment();
 	private Scanner sc;
 
 	public Caserne() {
@@ -17,13 +17,13 @@ public class Caserne extends Buildings {
 		capacite=20; 
 		coutGuerrier=50; // 50 de nouriture, j'ai trop la flemme d'utiliser les autres ressources
 						// fait le toi pour t'entrainer.
-		temps=2;//godmode
+		temps=5;//godmode
 	}
 
-	public void creeguerrier(Map m, Maison maison, People p, int a) {
+	public void creeguerrier(Plateau m, Maison maison, Population p, int a) {
 		if (a + p.totalpop(m, p) <= maison.ftotal(m)
 				&& Ressources.getfood() >= a * coutGuerrier) {
-			p.setWarrior( a);
+			p.soldat = p.soldat + a;
 			Ressources.setfood(-a * coutGuerrier);
 		} else {
 			if (a + p.totalpop(m, p) > maison.ftotal(m)) {

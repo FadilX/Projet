@@ -8,19 +8,19 @@ package civilization;
 // En gros durant le 1ère age pas de "ressources" secondaires ;)
 
 public class Bonus extends Ressources{
-	protected int bgold;
-	protected int bwood;
-	protected int brock;
-	protected int bfood;
+	protected double bgold=0;
+	protected double bwood=0;
+	protected double brock=0;
+	protected double bfood=0;
 	
 	// Bon... Je commence à trouver ceci dégueulasse, je pense que
 	// avec de l'héritage y'a moyen de rendre le code plus élégant, bosse là
 	// dessus si tu veux
 	//
-	Map m = new Map();
+	Plateau m = new Plateau();
 	Ressources r = new Ressources();
-	Buildings b = new Buildings();
-	People p = new People();
+	Batiment b = new Batiment();
+	Population p = new Population();
 
 	/**
 	 * Constructeur
@@ -32,35 +32,35 @@ public class Bonus extends Ressources{
 		setBfood(0);
 	}
 
-	public int getBgold() {
+	public double getBgold() {
 		return bgold;
 	}
 
-	public void setBgold(int a) {
+	public void setBgold(double a) {
 		bgold = bgold + a;
 	}
 
-	public int getBfood() {
+	public double getBfood() {
 		return bfood;
 	}
 
-	public void setBfood(int a) {
+	public void setBfood(double a) {
 		bfood = bfood + a;
 	}
 
-	public int getBwood() {
+	public double getBwood() {
 		return bwood;
 	}
 
-	public void setBwood(int a) {
+	public void setBwood(double a) {
 		bwood = bwood + a;
 	}
 
-	public int getBrock() {
+	public double getBrock() {
 		return brock;
 	}
 
-	public void setBrock(int a) {
+	public void setBrock(double a) {
 		brock = brock + a;
 	}
 
@@ -70,19 +70,36 @@ public class Bonus extends Ressources{
 	 * @param us
 	 *            Bonus
 	 * @param m
-	 *            Map
+	 *            Plateau
 	 * @param r
 	 *            Ressources
 	 * @param b
-	 *            Buildings
+	 *            Batiment
 	 * @param p
-	 *            People
+	 *            Population
+	 * @return 
 	 */
 	
-	// Gaffe quand j'écrirais la fonction qui permet de faire sortir les
-	// ouviers... Je pense que le a règle le problème 
-	public static void cbonus(Bonus bon, Map m, Ressources r, Buildings b,
-			People p) {
+	
+	public static double calcbonus(int z){
+		double coef;
+		
+			if (z==0)
+				coef = 0;
+			if (z>0 && z<4)
+				coef = 5*z;
+			if (z>3 && z<7)
+				coef = 5*(3+(2*(z-3)));
+			if (z>6 && z<10)
+				coef = 5*(9+((z-6)*3));
+			if (z==10)
+				coef = 100;
+			else
+				coef=0;
+			return coef;	
+		}
+	
+	public static void cbonus(Bonus bon, Plateau m, Ressources r, Batiment b, Population p) {
 		int[][] a= new int [10][10];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -90,15 +107,15 @@ public class Bonus extends Ressources{
 				switch (m.getT()[i][j]) {
 				case "mine":
 					
-					bon.setBgold(m.getNb()[i][j]-a[i][j]);
+					bon.setBgold(calcbonus(m.getNb()[i][j]-a[i][j]));
 					a[i][j]=m.getNb()[i][j]; 
 					break;
 				case "ferme":
-					bon.setBfood(m.getNb()[i][j]-a[i][j]);
+					bon.setBfood(calcbonus(m.getNb()[i][j]-a[i][j]));
 					a[i][j]=m.getNb()[i][j]; 
 					break;
 				case "scierie":
-					bon.setBwood(m.getNb()[i][j]-a[i][j]);
+					bon.setBwood(calcbonus(m.getNb()[i][j]-a[i][j]));
 					a[i][j]=m.getNb()[i][j]; 
 					break;
 				default:
@@ -108,15 +125,15 @@ public class Bonus extends Ressources{
 			}
 		}
 	}
-
+	/*
 	public static void main(String[] args) {
-		Map m = new Map();
+		
 		Ressources r = new Ressources();
-		Buildings b = new Buildings();
+		Batiment b = new Batiment();
 		Bonus bon = new Bonus();
-		People p = new People();
+		Population p = new Population();
 		cbonus(bon, m, r, b, p);
 
-	}
+	}*/
 
 }

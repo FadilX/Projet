@@ -6,7 +6,8 @@ import java.util.Scanner;
  * main pour le test Eclipse ne permet pas de print en couleur (en utilsant les
  * ANSI) Cependant avec System.err.println on a du rouge :)
  * 
- * @author Fadil
+ * @author Fadil1
+ * 
  *
  */
 
@@ -27,19 +28,20 @@ public class Simulation {
 	// case, et le nb d'unité
 
 	public static void main(String[] args) {
-		Buildings b = new Buildings();
-		People p = new People();
-		Map m = new Map();
+		Attaque attaque = new Attaque();
+		Batiment b = new Batiment();
+		Population p = new Population();
+		Plateau m=new Plateau();
 		Ressources r = new Ressources();
 		Scanner sc = new Scanner(System.in);
 		Bonus us = new Bonus();
 		Caserne caserne = new Caserne();
 		Ferme ferme = new Ferme();
-		Mines mine = new Mines();
+		Mine mine = new Mine();
 		Maison maison = new Maison();
 		Scierie scierie = new Scierie();
-		Hotel hotel=new Hotel();
-		Attaque attaque=new Attaque();
+		Carriere carriere = new Carriere();
+		Forum forum=new Forum();
 		int d = 1;
 		int e = 1;
 		String a;
@@ -48,16 +50,16 @@ public class Simulation {
 		// m.structure("T",4,3);
 		// m.structure("/",3,1);
 		// m.structure("n",2,1);
-		Time.temps();
+		Temps.temps();
 		Ressources.incRessource(us);
-		hotel.build(m);
+		forum.build(m);
 		
 		while (d == 1) {
-			System.err.println("Bienvenue, tapez 1 pour construire 0 sinon");
+			System.err.println("Bienvenue, tapez 1 pour construire, 0 sinon");
 			d = sc.nextInt();
 			if (d == 1) {
 				System.err
-						.println("tapez le nom du batiment que vous voulez construire (caserne, maison, ferme, mine)");
+						.println("Tapez le nom du batiment que vous voulez construire (ferme, scierie, mine, carrière, maison, caserne)");
 				Scanner s = new Scanner(System.in);
 				a = s.nextLine();
 
@@ -77,11 +79,13 @@ public class Simulation {
 					break;
 				case "scierie":
 					scierie.build(m);
+				case "carriere":
+					carriere.build(m);
 				default:
-					System.err.println("????");
+					System.err.println("?");
 				}
 			} else {
-				System.err.println("ok bye");
+				System.err.println("Bien, au revoir");
 			}
 		}
 		/**
@@ -92,7 +96,7 @@ public class Simulation {
 		 */
 		while (e == 1) {
 			System.err
-					.println("Voulez vous affecter vos ouvriers a un batiment?");
+					.println("Voulez-vous affecter vos villageois à un batiment?");
 			e = sc.nextInt();
 
 			if (e == 1) {
@@ -100,7 +104,7 @@ public class Simulation {
 				p.entrer(m, p);
 
 			} else {
-				System.err.println("ok bye");
+				System.err.println("Bien, au revoir");
 				e = 0;
 			}
 
@@ -109,7 +113,7 @@ public class Simulation {
 		e = 1;
 		while (e == 1) {
 			System.err
-					.println("Voulez vous faire sortir des unitées d'un batiment?");
+					.println("Voulez-vous faire sortir des unitées d'un batiment?");
 			e = sc.nextInt();
 
 			if (e == 1) {
@@ -117,13 +121,15 @@ public class Simulation {
 				p.sortir(m, p);
 
 			} else {
-				System.err.println("ok bye");
+				System.err.println("Bien, au revoir");
 				e = 0;
 			}
-			Map.afficher(m);
+			Bonus.cbonus(us, m, r, b, p);
+			Plateau.afficher(m);
 		}
+		
 		System.err
-				.println("Voulez vous detruire un batiment, vous perdrez tous les villageois qu'il y'a dedans");
+				.println("Voulez-vous detruire un batiment ? (vous perdrez tous les villageois qu'il y a dedans)");
 		int n = sc.nextInt();
 		if (n == 1) {
 			System.err.println("Choisissez un batiment");
@@ -131,35 +137,37 @@ public class Simulation {
 			int y = sc.nextInt();
 			m.anhilate(m, x, y);
 		} else {
-			System.err.println("Ok bye");
+			System.err.println("Bien, au revoir");
 		}
-		System.err.println("Voulez vous creez des villageois?");
+		System.err.println("Voulez-vous créer des villageois?");
 		int k=sc.nextInt();
 		if(k==1){
 		System.err.println("Combien?");
 		int v=sc.nextInt();
-		hotel.creevillageoi( m,  maison,  p,  v);
+		forum.creevillageois( m,  maison,  p,  v);
 		}
-		else{System.err.println("Ok bye");}
-		// il faudra bien sur avoir déjà construit une caserne... (un simple test if sur toutes les cases suffis)
-		System.err.println("Voulez vous creez des Guerriers?");
+		else{System.err.println("Bien, au revoir");}
+		// il faudra bien sur avoir déjà construit une caserne... (un simple test if sur toutes les cases suffit)
+		System.err.println("Voulez vous créer des soldats?");
 		int q=sc.nextInt();
 		if(q==1){
 		System.err.println("Combien?");
 		int w=sc.nextInt();
 		caserne.creeguerrier( m,  maison,  p,  w);
 		}
-		else{System.err.println("Ok bye");}
-		System.err.println("Voulez vous... tuer des unitees :)?");
+		else{System.err.println("Bien, au revoir");}
+		System.err.println("Voulez-vous tuer des unités ?");
 		int z=sc.nextInt();
 		if(z==1){
 			System.err.println("Combien?");
 			int h=sc.nextInt();
 			p.kill(p, h);
-		}
+		
+		}	
 		Bonus.cbonus(us, m, r, b, p);
-		Map.afficher(m);
+		Plateau.afficher(m);
 		attaque.go(p);
+
 	}
 }
 //  Done: vérifier si une case est libre avant de construire.
@@ -176,14 +184,6 @@ public class Simulation {
 //A faire:
 // Phase d'attaque... oulahlah va falloir établir des régles en gros t'as 2
 // choix tu te déffends ou tu payes
-/**
- * AVIS:
- * pourquoi ne pas avoir qu'une seul classe d'unité, des citoyens
- * tu determinera alors leurs role en les plaçants dans les batiments
- * ex: si tu as 10 citoyens, si t'en place 4 dans une caserne et 6 dans une ferme
- * t'aura 4 guerriers qui feront augmenté ta puissance militaire et 6 fermiers qui feront augmenter ta production de bouf
- * qu'en dis-tu? 
- */
 
 // Passage à un nouvel age (améliorations globale)
 //Classes secondaires

@@ -2,10 +2,10 @@ package civilization;
 
 import java.util.Scanner;
 
-public class Maison extends Buildings {
+public class Maison extends Batiment {
 	
 
-	Buildings b = new Buildings();
+	Batiment b = new Batiment();
 
 	// La somme des capacités des maisons disponibles devra être supérieur au
 	// nombres d'habitants, sans quoi il sera impossible de créer de nouvelles
@@ -24,7 +24,7 @@ public class Maison extends Buildings {
 	
 		
 	
-	public int ftotal(Map m){
+	public int ftotal(Plateau m){
 		int total=0;
 		for(int i=0;i<10;i++){
 			for(int j=0; j<10;j++){
@@ -36,5 +36,4 @@ public class Maison extends Buildings {
 		return total*capacite;
 	}
 
-	
 }
