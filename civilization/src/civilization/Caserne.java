@@ -25,6 +25,7 @@ public class Caserne extends Batiment {
 				&& Ressources.getfood() >= a * coutGuerrier) {
 			p.soldat = p.soldat + a;
 			Ressources.setfood(-a * coutGuerrier);
+			System.err.println("Les hommes sont prêts au combat");
 		} else {
 			if (a + p.totalpop(m, p) > maison.ftotal(m)) {
 				System.err.println("Vous devez construire plus de maisons");

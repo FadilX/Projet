@@ -57,7 +57,9 @@ public class Population extends Batiment {
 //fonction qui tue des unitees 3:)
 public void kill(Population p, int a){
 	if(a<=p.villageois){
-	p.villageois=p.villageois-a;}
+	p.villageois=p.villageois-a;
+	System.err.println("Les mécréants ont été exécutés Maître");
+	}
 	else{System.err.println("Vous n'avez pas autant d'unité");}
 	
 }

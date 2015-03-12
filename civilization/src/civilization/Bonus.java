@@ -99,7 +99,7 @@ public class Bonus extends Ressources{
 			return coef;	
 		}
 	
-	public static void cbonus(Bonus bon, Plateau m, Ressources r, Batiment b, Population p) {
+	public static void pbonus(Bonus bon, Plateau m, Ressources r, Batiment b, Population p) {
 		int[][] a= new int [10][10];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -107,15 +107,15 @@ public class Bonus extends Ressources{
 				switch (m.getT()[i][j]) {
 				case "mine":
 					
-					bon.setBgold(calcbonus(m.getNb()[i][j]-a[i][j]));
+					bon.setBgold(m.getNb()[i][j]-a[i][j]);
 					a[i][j]=m.getNb()[i][j]; 
 					break;
 				case "ferme":
-					bon.setBfood(calcbonus(m.getNb()[i][j]-a[i][j]));
+					bon.setBfood(m.getNb()[i][j]-a[i][j]);
 					a[i][j]=m.getNb()[i][j]; 
 					break;
 				case "scierie":
-					bon.setBwood(calcbonus(m.getNb()[i][j]-a[i][j]));
+					bon.setBwood(m.getNb()[i][j]-a[i][j]);
 					a[i][j]=m.getNb()[i][j]; 
 					break;
 				default:
@@ -124,7 +124,36 @@ public class Bonus extends Ressources{
 				}
 			}
 		}
+		}
+		public static void mbonus(Bonus bon, Plateau m, Ressources r, Batiment b, Population p) {
+			int[][] a= new int [10][10];
+			for (int i = 0; i < 10; i++) {
+				for (int j = 0; j < 10; j++) {
+
+					switch (m.getT()[i][j]) {
+					case "mine":
+						
+						bon.setBgold(-(m.getNb()[i][j]-a[i][j]));
+						a[i][j]=m.getNb()[i][j]; 
+						break;
+					case "ferme":
+						bon.setBfood(-(m.getNb()[i][j]-a[i][j]));
+						a[i][j]=m.getNb()[i][j]; 
+						break;
+					case "scierie":
+						bon.setBwood(-(m.getNb()[i][j]-a[i][j]));
+						a[i][j]=m.getNb()[i][j]; 
+						break;
+					default:
+						;
+
+					}
+				}
+			}
 	}
+	
+
+
 	/*
 	public static void main(String[] args) {
 		

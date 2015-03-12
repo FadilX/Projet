@@ -56,7 +56,7 @@ public class Simulation {
 		Ressources.incRessource(us);
 		forum.build(m);
 		System.err.println("Bienvenue, vous êtes le leader que nous attendions");
-		while(temp.seconde<180) {
+		while(attaque.getEnd()==0) {
 			System.err.println("Que voulez vous faire?"
 					+ " Tapez construire pour.. construire, vcreer pour creer des vilageois, gcreer pour creer des guerriers,"
 					+"affecter pour répartir vos villageois dans les différents batiments,"
@@ -109,7 +109,7 @@ public class Simulation {
 			case "affecter":
 			
 			p.entrer(m, p);
-			Bonus.cbonus(us, m, r, b, p);
+			Bonus.pbonus(us, m, r, b, p);
 
 				
 			break;
@@ -117,7 +117,7 @@ public class Simulation {
 			case "sortir":
 			
 					p.sortir(m, p);
-					Bonus.cbonus(us, m, r, b, p);
+					Bonus.mbonus(us, m, r, b, p);
 					//Plateau.afficher(m);
 				
 				break;
@@ -136,6 +136,7 @@ public class Simulation {
 				System.err.println("Combien?");
 				int v = sc.nextInt();
 				forum.creevillageois(m, maison, p, v);
+				System.err.println("Nos femmes ont mis au monde de nouveaux citoyens");
 			 
 			break;
 			// il faudra bien sur avoir déjà construit une caserne... (un simple
@@ -144,6 +145,7 @@ public class Simulation {
 				System.err.println("Combien?");
 				int w = sc.nextInt();
 				caserne.creeguerrier(m, maison, p, w);
+				
 			break;
 			
 			case "vastalavista":
@@ -151,15 +153,18 @@ public class Simulation {
 				System.err.println("Combien?");
 				int h = sc.nextInt();
 				p.kill(p, h);
+				
 			break;
 			
 			default:
-				System.out.println("commande non reconnu");
+				System.out.println("commande non reconnue");
+			}
+			if((temp.seconde)/60==attaque.getVague()){
+				attaque.go(p);
 			}
 			
-			
 		}
-		attaque.go(p);}
+		System.out.println("Continue??");}
 	
 }
 
@@ -192,3 +197,5 @@ public class Simulation {
 // Interface graphique
 // fun, cameo de personnages historiques, air spatiale=stage bonus, et enfin les
 // Cheats :').
+// Pourquoi ne pas faire une sorte de jeu d'arcade ou le joueur aurait un nombre de coins :) on poura faire notre chaine
+// avec ça :p, on aura genre un décompte 10, 9, 8, 7 COntinue :)?
