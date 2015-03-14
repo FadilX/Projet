@@ -20,14 +20,14 @@ public class Batiment extends Plateau {
 	 * @param r
 	 *            Ressources
 	 */
-	String batiment;
-	int habitant;
-	int capacite;
-	int cgold;
-	int crock;
-	int cwood;
-	int cfood;
-	int temps;
+	protected String batiment;
+	protected  int habitant;
+	protected  int capacite;
+	protected int cgold;
+	protected int crock;
+	protected int cwood;
+	protected int cfood;
+	protected int temps;
 	
 	
 	public Batiment() {

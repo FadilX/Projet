@@ -12,10 +12,10 @@ public class Ressources extends Batiment {
 
 	public Ressources() {
 		
-		Or = 500; 
-		Pierre =500;
-		Nourriture = 500;
-		Bois = 500;
+		Or = 5000; 
+		Pierre =5000;
+		Nourriture = 5000;
+		Bois = 5000;
 
 	}
 

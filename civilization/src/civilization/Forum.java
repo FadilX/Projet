@@ -1,6 +1,6 @@
 package civilization;
 
-import java.util.Scanner;
+
 
 public class Forum extends Batiment {
 	int coutVillageois;

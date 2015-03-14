@@ -42,6 +42,8 @@ public class Simulation {
 		Scierie scierie = new Scierie();
 		Carriere carriere = new Carriere();
 		Forum forum = new Forum();
+		Age age=new Age();
+		Special special=new Special();
 		Temps temp=new Temps();
 		int d = 1;
 		int e = 1;
@@ -64,7 +66,9 @@ public class Simulation {
 					+ "vastalavista pour tuer des villageois"
 					+ "gastalavista pour tuer des guerriers"
 					+"sortir pour faire sortir vos villageois d'un batiment"
+					+"Age pour passer à l'age suivant"
 					);
+			
 			 com=sc.nextLine();
 			switch (com) {
 			case "construire":
@@ -108,19 +112,19 @@ public class Simulation {
 			 */
 			case "affecter":
 			
-			p.entrer(m, p);
-			Bonus.pbonus(us, m, r, b, p);
+			p.entrer( m, p,us,b,r);
+			
 
 				
 			break;
 
 			case "sortir":
 			
-					p.sortir(m, p);
-					Bonus.mbonus(us, m, r, b, p);
+			p.sortir( m, p,us,b,r);
+					
 					//Plateau.afficher(m);
 				
-				break;
+			break;
 				
 			
 			case "detruire":
@@ -147,7 +151,10 @@ public class Simulation {
 				caserne.creeguerrier(m, maison, p, w);
 				
 			break;
-			
+			case "age":
+				 age.newAge(m,special,age,us,r,maison,mine,carriere,ferme, scierie);
+				 break;
+
 			case "vastalavista":
 			
 				System.err.println("Combien?");
@@ -159,7 +166,7 @@ public class Simulation {
 			default:
 				System.out.println("commande non reconnue");
 			}
-			if((temp.seconde)/60==attaque.getVague()){
+			if((temp.seconde)/300==attaque.getVague()){
 				attaque.go(p);
 			}
 			

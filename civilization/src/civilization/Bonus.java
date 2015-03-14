@@ -118,6 +118,10 @@ public class Bonus extends Ressources{
 					bon.setBwood(m.getNb()[i][j]-a[i][j]);
 					a[i][j]=m.getNb()[i][j]; 
 					break;
+				case "carriere":
+					bon.setBrock(m.getNb()[i][j]-a[i][j]);
+					a[i][j]=m.getNb()[i][j]; 
+					break;
 				default:
 					;
 
@@ -133,19 +137,23 @@ public class Bonus extends Ressources{
 					switch (m.getT()[i][j]) {
 					case "mine":
 						
-						bon.setBgold(-(m.getNb()[i][j]-a[i][j]));
+						bon.setBgold((m.getNb()[i][j]-a[i][j])-bon.getBfood());
 						a[i][j]=m.getNb()[i][j]; 
 						break;
 					case "ferme":
-						bon.setBfood(-(m.getNb()[i][j]-a[i][j]));
+						bon.setBfood((m.getNb()[i][j]-a[i][j])-bon.getBfood());
 						a[i][j]=m.getNb()[i][j]; 
 						break;
 					case "scierie":
-						bon.setBwood(-(m.getNb()[i][j]-a[i][j]));
+						bon.setBwood((m.getNb()[i][j]-a[i][j])-bon.getBfood());
 						a[i][j]=m.getNb()[i][j]; 
+						break;
+					case "carriere":
+						bon.setBrock((m.getNb()[i][j]-a[i][j])-bon.getBrock());
 						break;
 					default:
 						;
+						
 
 					}
 				}

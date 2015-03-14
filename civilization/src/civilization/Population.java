@@ -83,10 +83,11 @@ public void kill(Population p, int a){
 	// telle ressources,
 	// la présence des autres classes seuls suffira pour bénificier de leur
 	// bonus
-	public void in(Plateau m, Population p, int a, int x, int y) {
+	public void in(Plateau m, Bonus bon,Batiment b,Ressources r, Population p, int a, int x, int y) {
 		if (a <= p.villageois && m.getNb()[x][y] + a <= m.getCap(x, y)) {
 			m.setNb(x, y, m.getNb()[x][y]+a);
 			p.villageois = p.villageois - a;
+			bon.pbonus(bon,m,r,b,p);
 			Plateau.afficher(m);
 		}
 		// Je comprends... c'est pour ça qu'il nous disait mot de passe ou nom
@@ -101,10 +102,11 @@ public void kill(Population p, int a){
 		}
 	}
 
-	public void out(Plateau m, Population p, int a, int x, int y) {
+	public void out(Plateau m, Bonus bon,Batiment b,Ressources r, Population p, int a, int x, int y) {
 		if (a <= m.getNb()[x][y]) {
 			m.setNb(x, y, m.getNb()[x][y]-a);
 			p.villageois = p.villageois + a;
+			bon.mbonus(bon,m,r,b,p);
 			Plateau.afficher(m);
 		}
 		// Je comprends... c'est pour ça qu'il nous disait mot de passe ou nom
@@ -143,7 +145,7 @@ public void kill(Population p, int a){
 		}.start();
 	}
 
-	public void entrer(Plateau m, Population p) {
+	public void entrer(Plateau m, Population p,Bonus bon,Batiment b,Ressources r) {
 		Scanner sc = new Scanner(System.in);
 		System.err.println("Choisissez un batiment");
 		int x = sc.nextInt();
@@ -175,7 +177,7 @@ public void kill(Population p, int a){
 if(d==0){
 		System.err.println("Combien d'unite voulez vous y placez");
 		int c = sc.nextInt();
-		in(m, p, c, x, y);}
+		in(m,bon, b, r,  p, c,x, y);}
 else{ System.err.println("Choisissez une autre case");}
 
 	}
@@ -185,7 +187,7 @@ else{ System.err.println("Choisissez une autre case");}
 	// seulement, je pense que ça serait trop lourd et que ça ne présente pas
 	// vraiment de problème d'autant plus
 	// qu'intuitivement c'est plus logique pour l'interface graphique)
-	public void sortir(Plateau m, Population p) {
+	public void sortir(Plateau m, Population p,Bonus bon,Batiment b,Ressources r) {
 		Scanner sc = new Scanner(System.in);
 		System.err.println("Choisissez un batiment");
 		int x = sc.nextInt();
@@ -217,7 +219,7 @@ else{ System.err.println("Choisissez une autre case");}
 		if(d==0){
 		System.err.println("Combien d'unités voulez-vous évacuer du batiment");
 		int c = sc.nextInt();
-		out(m, p, c, x, y);
+		out(m,bon, b, r,  p, c,x, y);
 		}
 		else{System.err.println("Choisissez une autre case");}
 	}

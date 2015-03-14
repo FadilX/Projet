@@ -1,6 +1,6 @@
 package civilization;
 
-import java.util.Scanner;
+
 
 public class Maison extends Batiment {
 	
@@ -22,7 +22,6 @@ public class Maison extends Batiment {
 		
 	}
 	
-		
 	
 	public int ftotal(Plateau m){
 		int total=0;
