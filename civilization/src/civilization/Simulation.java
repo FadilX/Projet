@@ -44,6 +44,7 @@ public class Simulation {
 		Forum forum = new Forum();
 		Age age=new Age();
 		Special special=new Special();
+		Cheat cheat=new Cheat();
 		Temps temp=new Temps();
 		int d = 1;
 		int e = 1;
@@ -67,6 +68,7 @@ public class Simulation {
 					+ "gastalavista pour tuer des guerriers"
 					+"sortir pour faire sortir vos villageois d'un batiment"
 					+"Age pour passer à l'age suivant"
+					
 					);
 			
 			 com=sc.nextLine();
@@ -160,8 +162,15 @@ public class Simulation {
 				System.err.println("Combien?");
 				int h = sc.nextInt();
 				p.kill(p, h);
+			
 				
 			break;
+			case "Adrien":
+				cheat.AdrienCheat(r);
+				break;
+			case "Fadil":
+				cheat.FadilCheat(r);
+				break;
 			
 			default:
 				System.out.println("commande non reconnue");
