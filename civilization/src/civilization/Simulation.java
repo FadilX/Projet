@@ -12,21 +12,8 @@ import java.util.Scanner;
  */
 
 public class Simulation {
-	// Y'a une petit message d'erreur, mais bourine ça marche
 	// t'as le temps, et le nombre qui s'affiche c'est l'or, il s'icrémente en
-	// fonction du temps (+1/s). j'ai pris l'or atitdixemple
-	// en gros tape 1 en premier pour construire, puis tappe le nom du batiment,
-	// pas grave si t'arrive pas a taper le nom en moins d'une seconde
-	// Moi j'y arrive mais tu peux pas test ;)
-	// Puis tu choisis son emplacement, remarque que le gold est décompté
-	// (comme les autres ressoources en arière plan)
-	// Tu choisis si tu veux construire une nouvelle fois, pareil...
-	// si t'as pas assez de ressources tappe 0
-	// ça va t'envoyer sur la fonction affectation qui te permet d'affecter tes
-	// unités a un batiment,
-	// tu tapes 1 si tu veux affecter 0 sinon, aprés tu tappes les coos de la
-	// case, et le nb d'unité
-
+	// fonction du temps (+1/s). j'ai pris l'or
 	public static void main(String[] args) {
 		Attaque attaque = new Attaque();
 		Batiment b = new Batiment();
@@ -42,12 +29,11 @@ public class Simulation {
 		Scierie scierie = new Scierie();
 		Carriere carriere = new Carriere();
 		Forum forum = new Forum();
-		Age age=new Age();
-		Special special=new Special();
-		Cheat cheat=new Cheat();
-		Temps temp=new Temps();
-		int d = 1;
-		int e = 1;
+		Age age = new Age();
+		Special special = new Special();
+		Cheat cheat = new Cheat();
+		Temps temp = new Temps();
+
 		String a;
 		String com;
 
@@ -56,56 +42,58 @@ public class Simulation {
 		// m.structure("/",3,1);
 		// m.structure("n",2,1);
 		temp.temps();
-		Ressources.incRessource(us);
+		r.incRessource(us);
 		forum.build(m);
-		System.err.println("Bienvenue, vous êtes le leader que nous attendions");
-		while(attaque.getEnd()==0) {
-			System.err.println("Que voulez vous faire?"
-					+ " Tapez construire pour.. construire, vcreer pour creer des vilageois, gcreer pour creer des guerriers,"
-					+"affecter pour répartir vos villageois dans les différents batiments,"
-					+ "detruire pour détruire un batiment, attention! vous perdrez toutes les unitées qui s'y trouvent"
-					+ "vastalavista pour tuer des villageois"
-					+ "gastalavista pour tuer des guerriers"
-					+"sortir pour faire sortir vos villageois d'un batiment"
-					+"Age pour passer à l'age suivant"
-					
+		System.err
+				.println("Bienvenue, vous êtes le leader que nous attendions");
+		while (attaque.getEnd() == 0) {
+			System.err
+					.println("Que voulez vous faire?"
+							+ " Tapez construire pour.. construire, vcreer pour creer des vilageois, gcreer pour creer des guerriers,"
+							+ "affecter pour répartir vos villageois dans les différents batiments,"
+							+ "detruire pour détruire un batiment, attention! vous perdrez toutes les unitées qui s'y trouvent"
+							+ "vastalavista pour tuer des villageois"
+							+ "gastalavista pour tuer des guerriers"
+							+ "sortir pour faire sortir vos villageois d'un batiment"
+							+ "Age pour passer à l'age suivant"
+
 					);
-			
-			 com=sc.nextLine();
+
+			com = sc.nextLine();
 			switch (com) {
 			case "construire":
-			
-				
-					System.err
-							.println("Tapez le nom du batiment que vous voulez construire (ferme, scierie, mine, carrière, maison, caserne)");
-					Scanner s = new Scanner(System.in);
-					a = s.nextLine();
 
-					switch (a) {
+				System.err
+						.println("Tapez le nom du batiment que vous voulez construire (ferme, scierie, mine, carrière, maison, caserne)");
+				Scanner s = new Scanner(System.in);
+				a = s.nextLine();
 
-					case "caserne":
-						caserne.build(m);
-						break;
-					case "mine":
-						mine.build(m);
-						break;
-					case "ferme":
-						ferme.build(m);
-						break;
-					case "maison":
-						maison.build(m);
-						break;
-					case "scierie":
-						scierie.build(m);
-					case "carriere":
-						carriere.build(m);
-					default:
-						System.err.println("?");
-					}
-				
-			break;
-			
-			
+				switch (a) {
+
+				case "caserne":
+					caserne.build(m, r);
+					break;
+				case "mine":
+					mine.build(m, r);
+					break;
+				case "ferme":
+					ferme.build(m, r);
+					break;
+				case "maison":
+					maison.build(m, r);
+					break;
+				case "scierie":
+					scierie.build(m, r);
+					break;
+				case "carriere":
+					carriere.build(m, r);
+					break;
+				default:
+					System.err.println("?");
+				}
+
+				break;
+
 			/**
 			 * 
 			 * t'as une médaille si t'arrive à montrer pourquoi les bonus ne
@@ -113,75 +101,75 @@ public class Simulation {
 			 * l'affectation
 			 */
 			case "affecter":
-			
-			p.entrer( m, p,us,b,r);
-			
 
-				
-			break;
+				p.entrer(m, p, us, b, r);
+
+				break;
 
 			case "sortir":
-			
-			p.sortir( m, p,us,b,r);
-					
-					//Plateau.afficher(m);
-				
-			break;
-				
-			
+
+				p.sortir(m, p, us, b, r);
+
+				// Plateau.afficher(m);
+
+				break;
+
 			case "detruire":
-			
+
 				System.err.println("Choisissez un batiment");
 				int x = sc.nextInt();
 				int y = sc.nextInt();
 				m.anhilate(m, x, y);
-			 
-			break;
-			case "vcreer": 
-			
+
+				break;
+			case "vcreer":
+
 				System.err.println("Combien?");
 				int v = sc.nextInt();
-				forum.creevillageois(m, maison, p, v);
-				System.err.println("Nos femmes ont mis au monde de nouveaux citoyens");
-			 
-			break;
+				forum.creevillageois(m, maison, p, r, v);
+				System.err
+						.println("Nos femmes ont mis au monde de nouveaux citoyens");
+
+				break;
 			// il faudra bien sur avoir déjà construit une caserne... (un simple
 			// test if sur toutes les cases suffit)
 			case "gcreer":
 				System.err.println("Combien?");
 				int w = sc.nextInt();
-				caserne.creeguerrier(m, maison, p, w);
-				
-			break;
+				caserne.creeguerrier(m, maison, p, r, w);
+
+				break;
 			case "age":
-				 age.newAge(m,special,age,us,r,maison,mine,carriere,ferme, scierie);
-				 break;
+				age.newAge(m, special, age, us, r, maison, mine, carriere,
+						ferme, scierie);
+				break;
 
 			case "vastalavista":
-			
+
 				System.err.println("Combien?");
 				int h = sc.nextInt();
 				p.kill(p, h);
-			
-				
-			break;
+
+				break;
 			case "Adrien":
 				cheat.AdrienCheat(r);
 				break;
 			case "Fadil":
 				cheat.FadilCheat(r);
 				break;
-			
+
 			default:
 				System.out.println("commande non reconnue");
 			}
-			if((temp.seconde)/300==attaque.getVague()){
-				attaque.go(p);
+			if ((temp.seconde) / 120 == attaque.getVague()) {
+				attaque.go(p, r);
 			}
-			
+
 		}
-		System.out.println("Continue??");}
-	
+		System.out.println("La partie est terminée");
+
+	}
+
 }
 
 // Done: vérifier si une case est libre avant de construire.
@@ -213,5 +201,6 @@ public class Simulation {
 // Interface graphique
 // fun, cameo de personnages historiques, air spatiale=stage bonus, et enfin les
 // Cheats :').
-// Pourquoi ne pas faire une sorte de jeu d'arcade ou le joueur aurait un nombre de coins :) on poura faire notre chaine
+// Pourquoi ne pas faire une sorte de jeu d'arcade ou le joueur aurait un nombre
+// de coins :) on poura faire notre chaine
 // avec ça :p, on aura genre un décompte 10, 9, 8, 7 COntinue :)?

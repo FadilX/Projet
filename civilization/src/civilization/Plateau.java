@@ -2,78 +2,77 @@ package civilization;
 
 /**
  * 
- * @author Fadil Cette première classe permet de générer notre plateau. Chaque case
- *         est représenté par ces coordonées (x,y) j'ai choisis deux boucles for
- *         imbriquées pour la création... assez bourin, je réfléchirais a une
- *         méthode récursive
+ * @author Fadil Cette première classe permet de générer notre plateau. Chaque
+ *         case est représenté par ces coordonées (x,y) j'ai choisis deux
+ *         boucles for imbriquées pour la création... assez bourin, je
+ *         réfléchirais a une méthode récursive
  */
 
 // t représente les coordonnées de la case
 // nb le nombre d'unité placé dans le batiment sur cette case.
 
-
-
-
 public class Plateau {
-	
-public static int abs = 10;
-public static int ord = 10;
+
+	protected static int abs = 10;
+	protected static int ord = 10;
 
 	protected String[][] t = new String[abs][ord];
 	protected int[][] nb = new int[abs][ord];
-	protected int[][] cap= new int[abs][ord];
+	protected int[][] cap = new int[abs][ord];
+
 	/**
 	 * intialisation à 0
 	 * 
 	 */
 
-	public  Plateau() {
+	public Plateau() {
 		for (int i = 0; i < abs; i++) {
 			for (int j = 0; j < ord; j++) {
-				setT(i,j,"(" + i + ","+ j+")");
-				setNb(i,j,0);
-				setCap(i,j,0);
+				setT(i, j, "(" + i + "," + j + ")");
+				setNb(i, j, 0);
+				setCap(i, j, 0);
 			}
 		}
 	}
+
 	/**
 	 * getters & setters On en a besoin pour pouvoir accéder aux variables
 	 * privées de l'extérieur de la classe
 	 * 
 	 * @return
 	 */
-	public int getCap(int x, int y){
+	public int getCap(int x, int y) {
 		return cap[x][y];
 	}
-	public void setCap(int i, int j, int a){
-		cap[i][j]=a;
+
+	public void setCap(int i, int j, int a) {
+		cap[i][j] = a;
 	}
+
 	// try public string get(int x int y){
 	// return t[x][y];
-	//}
+	// }
 	public String[][] getT() {
 		return t;
 	}
 
-	public  void setT(int i, int j, String a) {
+	public void setT(int i, int j, String a) {
 		t[i][j] = a;
 	}
 
-	public  int[][] getNb() {
+	public int[][] getNb() {
 		return nb;
 	}
 
-	public  void setNb(int i, int j, int a) {
+	public void setNb(int i, int j, int a) {
 		nb[i][j] = a;
 	}
-
-	
 
 	/**
 	 * Affiche le plateau
 	 */
 	public static void afficher(Plateau m) {
-		
+
 		for (int i = 0; i < abs; i++) {
 			for (int j = 0; j < ord; j++) {
 				System.out.print(m.getT()[i][j] + m.getNb()[i][j] + '\t');
@@ -81,11 +80,12 @@ public static int ord = 10;
 			System.out.println();
 		}
 	}
-	public  void anhilate(Plateau m, int x, int y){
-		
-		setT(x,y,"("+x+","+y+")");
-		setNb(x,y,0);
-		setCap(x,y,0);
+
+	public void anhilate(Plateau m, int x, int y) {
+
+		setT(x, y, "(" + x + "," + y + ")");
+		setNb(x, y, 0);
+		setCap(x, y, 0);
 	}
 
 	/**
@@ -114,11 +114,11 @@ public static int ord = 10;
 		 * }
 		 */
 	}
-	
-	public static void main(String[] args){
-		Plateau m=new Plateau();
+
+	public static void main(String[] args) {
+		Plateau m = new Plateau();
 		afficher(m);
-		m.setNb(2,2,1);
+		m.setNb(2, 2, 1);
 		afficher(m);
 	}
 

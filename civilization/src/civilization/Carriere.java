@@ -1,10 +1,6 @@
 package civilization;
 
-import java.util.Scanner;
-
 public class Carriere extends Batiment {
-
-	Batiment b = new Batiment();
 
 	// La somme des capacités des maisons disponibles devra être supérieur au
 	// nombres d'habitants, sans quoi il sera impossible de créer de nouvelles
@@ -20,6 +16,4 @@ public class Carriere extends Batiment {
 		temps = 5;
 	}
 
-	
 }
-

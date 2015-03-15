@@ -5,64 +5,65 @@ package civilization;
  * plusieurs classes filles.
  */
 public class Ressources extends Batiment {
-	protected static double Or;
-	protected static double Pierre;
-	protected static double Nourriture;
-	protected static double Bois;
+	protected double Or;
+	protected double Pierre;
+	protected double Nourriture;
+	protected double Bois;
 
 	public Ressources() {
-		
-		Or = 5000; 
-		Pierre =5000;
-		Nourriture = 5000;
-		Bois = 5000;
+
+		Or = 300;
+		Pierre = 300;
+		Nourriture = 300;
+		Bois = 300;
 
 	}
 
-	public static double getgold() {
+	public double getgold() {
 		return Or;
 
 	}
 
-	public static double getrock() {
+	public double getrock() {
 		return Pierre;
 
 	}
 
-	public static double getwood() {
+	public double getwood() {
 		return Bois;
 
 	}
 
-	public static double getfood() {
+	public double getfood() {
 		return Nourriture;
 	}
 
-	public static void setfood(double a) {
+	public void setfood(double a) {
 		Nourriture = Nourriture + a;
 
 	}
 
-	public static void setwood(double a) {
+	public void setwood(double a) {
 		Bois = Bois + a;
 	}
 
-	public static void setrock(double a) {
+	public void setrock(double a) {
 		Pierre = Pierre + a;
 	}
 
-	public static void setgold(double a) {
+	public void setgold(double a) {
 		Or = Or + a;
 	}
 
-	// Methode qui permet l'incrémentation des ressources avec le temps et en fonction de la main d'oeuvre affectée par batiment
+	// Methode qui permet l'incrémentation des ressources avec le temps et en
+	// fonction de la main d'oeuvre affectée par batiment
 	// Là aussi il faut travailler avec des threads
 	// bonus est une variable qui dépend de la nb[][] affecté au batiment qui
 	// récolte la dite ressource, et de la techno;
 	// Il y'a un problème ici, je ne sais pas encore comment tuer une Thread,
 	// j'ai des idées pour des méthdes bourines mais y doit avoir une methode
 	// faite pour
-	public static void incRessource(Bonus bon) {
+	public void incRessource(Bonus bon) {
 
 		new Thread() {
 
@@ -71,18 +72,18 @@ public class Ressources extends Batiment {
 				int t = 0;
 
 				while (t == 0) {
-					
+
 					// pour tuer if(paramètre controlé depuis le main){
-						//t=1;}
+					// t=1;}
 					try {
 						Thread.sleep(5000);
 					} catch (InterruptedException e) {
 						System.out.println("erreur");
 					}
-					setgold(5 + bon.getBgold());
-					setrock(5 + bon.getBrock());
-					setwood(5 + bon.getBwood());
-					setfood(5 + bon.getBfood());
+					setgold(1 + bon.getBgold());
+					setrock(1 + bon.getBrock());
+					setwood(1 + bon.getBwood());
+					setfood(1 + bon.getBfood());
 
 					System.out.print(" Nourriture:");
 					affichRessource(getfood());
@@ -92,21 +93,21 @@ public class Ressources extends Batiment {
 					affichRessource(getgold());
 					System.out.print(" Pierre:");
 					affichRessource(getrock());
-					
-					
+
 				}
 
 			}
 		}.start();
 	}
 
-	public static void affichRessource(double a) {
+	public void affichRessource(double a) {
 		System.out.print(a);
 	}
 
 	public static void main(String[] args) {
 		Bonus b = new Bonus();
-		incRessource(b);
+		Ressources r = new Ressources();
+		r.incRessource(b);
 	}
 
 }

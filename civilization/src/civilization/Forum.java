@@ -1,11 +1,7 @@
 package civilization;
 
-
-
 public class Forum extends Batiment {
-	int coutVillageois;
-
-	Batiment b = new Batiment();
+	protected int coutVillageois;
 
 	public Forum() {
 		super();
@@ -18,11 +14,12 @@ public class Forum extends Batiment {
 	// t'as le droit de creez un certain nombre d'unité puis de détruire des
 	// maisons, à ce moment là tu peux avoir total< nb d'unitées mais tu peux
 	// pas en créer
-	public void creevillageois(Plateau m, Maison maison, Population p, int a) {
+	public void creevillageois(Plateau m, Maison maison, Population p,
+			Ressources ressources, int a) {
 		if (a + p.totalpop(m, p) <= maison.ftotal(m)
-				&& Ressources.getfood() >= a * coutVillageois) {
+				&& ressources.getfood() >= a * coutVillageois) {
 			p.villageois = p.villageois + a;
-			Ressources.setfood(-a * coutVillageois);
+			ressources.setfood(-a * coutVillageois);
 		} else {
 			if (a + p.totalpop(m, p) > maison.ftotal(m)) {
 				System.err.println("Vous devez construire plus de maisons");

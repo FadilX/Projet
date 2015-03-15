@@ -1,11 +1,6 @@
 package civilization;
 
-import java.util.Scanner;
-
 public class Scierie extends Batiment {
-
-	Batiment b = new Batiment();
-
 	// La somme des capacités des maisons disponibles devra être supérieur au
 	// nombres d'habitants, sans quoi il sera impossible de créer de nouvelles
 	// unités.
@@ -17,10 +12,7 @@ public class Scierie extends Batiment {
 		cwood = 50;
 		cfood = 25;
 		capacite = 10;
-		temps = 5;//godmode
+		temps = 5;// godmode
 	}
 
-	
-
-	
 }

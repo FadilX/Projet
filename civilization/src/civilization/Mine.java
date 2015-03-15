@@ -1,11 +1,6 @@
 package civilization;
 
-import java.util.Scanner;
-
 public class Mine extends Batiment {
-
-	Batiment b = new Batiment();
-
 	// La somme des capacités des maisons disponibles devra être supérieur au
 	// nombres d'habitants, sans quoi il sera impossible de créer de nouvelles
 	// unités.
@@ -20,6 +15,4 @@ public class Mine extends Batiment {
 		temps = 5;
 	}
 
-	
 }
-

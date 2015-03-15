@@ -1,11 +1,7 @@
 package civilization;
 
-import java.util.Scanner;
-
 public class Caserne extends Batiment {
 	int coutGuerrier;
-	Batiment b = new Batiment();
-	private Scanner sc;
 
 	public Caserne() {
 		super();
@@ -21,7 +17,8 @@ public class Caserne extends Batiment {
 		temps = 5;// godmode
 	}
 
-	public void creeguerrier(Plateau m, Maison maison, Population p, int a) {
+	public void creeguerrier(Plateau m, Maison maison, Population p,
+			Ressources ressources, int a) {
 		int b = 0;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -32,9 +29,9 @@ public class Caserne extends Batiment {
 			}
 		}
 		if (a + p.totalpop(m, p) <= maison.ftotal(m)
-				&& Ressources.getfood() >= a * coutGuerrier && b == 1) {
+				&& ressources.getfood() >= a * coutGuerrier && b == 1) {
 			p.soldat = p.soldat + a;
-			Ressources.setfood(-a * coutGuerrier);
+			ressources.setfood(-a * coutGuerrier);
 			System.err.println("Les hommes sont prêts au combat");
 		} else {
 			if (a + p.totalpop(m, p) > maison.ftotal(m)) {

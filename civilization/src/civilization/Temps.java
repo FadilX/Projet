@@ -2,10 +2,18 @@ package civilization;
 
 public class Temps {
 
-	static int seconde = -5;
-	public static void temps() {
+	protected int seconde = -5;
+	public int getSeconde(){
+		return seconde;
+	}
+	public void setSeconde(int seconde){
+		this.seconde=seconde;
+	}
+		
+	public  void temps() {
 		int t = 0;
 		
+
 		// Notre timer, on l'utilisera pour l'enchainement des vagues
 		// les thread permettent d'executer plusieurs fonctions en même temps
 		new Thread()
